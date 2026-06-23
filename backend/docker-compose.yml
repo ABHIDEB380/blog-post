@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: prostgres_blog
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: blog_post
+    ports:
+      - "5432:5432"
+    volumes:
+      - "/project/volume:/var/lib/postgresql/data"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_blogpost
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
