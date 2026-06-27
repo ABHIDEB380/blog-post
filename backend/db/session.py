@@ -18,7 +18,6 @@ def get_db() -> Generator:
         db = SESSIONLOCAL()
         yield db
     except Exception as e:
-        print(f"Error inside generator: {e}")
-        raise
+        raise e
     finally:
         db.close()

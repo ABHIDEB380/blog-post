@@ -27,7 +27,6 @@ def retrive_blog(blog_id: int, db: Session):
 
 def retrive_all_blog(db: Session):
     blog = db.scalars(select(Blog)).all()
-    print("from blog",blog)
     if not blog:
         raise HTTPException(detail=f"Blog not found.", status_code=status.HTTP_404_NOT_FOUND)
     return blog
@@ -35,6 +34,10 @@ def retrive_all_blog(db: Session):
 def update_a_blog(blog_id: int, db:Session, blog: BlogUpdate, author_id):
     # db.query(Blog).filter(Blog.id == blog_id).first()
     updated_blog = db.query(Blog).filter(Blog.id == blog_id).first() #db.scalars(select(Blog).where(Blog.id==blog_id))
+    if not updated_blog:
+        return {"error": f"Blog doesn't exist with id {blog_id}"}
+    if not updated_blog.author_id == author_id:
+        return {"error": "Only a author of the blog can update the blog"}
     updated_blog.tittle = blog.tittle
     updated_blog.content = blog.content
     updated_blog.author_id = author_id

@@ -15,6 +15,12 @@ POSTGRES_SERVER= os.getenv("POSTGRES_SERVER")
 class Settings():
     PROJECT_NAME: str = "Blog Post📪"
     PROJECT_VERSION: str = "0.1.0"
-    POSTGRES_DB_URL= f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}"
+    POSTGRES_DB_URL: str = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}"
+    PRIVET_KEY: str = os.getenv("PRIVET_KEY")
+    PUBLIC_KEY:str=os.getenv("PUBLIC_KEY")
+    JWT_ALGO:str= os.getenv("JWT_ALGO")
+    JWT_ISSUER:str= os.getenv("JWT_ISSUER")
+    JWT_AUDIENCE:str = os.getenv("JWT_AUDIENCE")
+    JWT_EXPIRE_MINUTES:int= os.getenv("JWT_EXPIRE_MINUTES")
 
 settings = Settings()
