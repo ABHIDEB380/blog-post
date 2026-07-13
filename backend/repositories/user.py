@@ -4,8 +4,8 @@ from db.models.user import User
 from core.hashing import Hash
 from fastapi import HTTPException, status
 
-def create_new_user(user_ft: UserCreate, db: Session):
-    user = db.query(User).filter(User.email_id == user_ft.email_id).first()
+def create_new_user(user_dt: UserCreate, db: Session):
+    user = db.query(User).filter(User.email_id == user_dt.email_id).first()
     if user:
         raise HTTPException(
             detail= "User with same email already exist",
@@ -13,8 +13,8 @@ def create_new_user(user_ft: UserCreate, db: Session):
         )
     else:
         user = User(
-            email_id = user_ft.email_id,
-            password = Hash.get_pwd_hash(user_ft.password),
+            email_id = user_dt.email_id,
+            password = Hash.get_pwd_hash(user_dt.password),
             is_active = True
         )
         db.add(user)

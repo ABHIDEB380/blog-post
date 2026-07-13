@@ -38,7 +38,7 @@ def get_current_user(token: str = Depends(oauth2_schema), db: Session= Depends(g
         status_code= status.HTTP_401_UNAUTHORIZED
     )
     try:
-        playload = jwt.decode(token, key= settings.PRIVET_KEY, algorithms=settings.JWT_ALGO)
+        playload = jwt.decode(token, key= settings.PRIVATE_KEY, algorithms=settings.JWT_ALGO)
         email_id = playload.get("sub")
         if email_id is None:
             raise creditial_exception
